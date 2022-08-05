@@ -336,7 +336,9 @@ int WebPEncode(const WebPConfig* config, WebPPicture* pic) {
   if (!WebPValidateConfig(config)) {
     return WebPEncodingSetError(pic, VP8_ENC_ERROR_INVALID_CONFIGURATION);
   }
-  if (!WebPValidatePicture(pic)) return 0;
+  if (pic->width <= 0 || pic->height <= 0) {
+    return WebPEncodingSetError(pic, VP8_ENC_ERROR_BAD_DIMENSION);
+  }
   if (pic->width > WEBP_MAX_DIMENSION || pic->height > WEBP_MAX_DIMENSION) {
     return WebPEncodingSetError(pic, VP8_ENC_ERROR_BAD_DIMENSION);
   }
@@ -398,7 +400,7 @@ int WebPEncode(const WebPConfig* config, WebPPicture* pic) {
     }
 
     if (!config->exact) {
-      WebPReplaceTransparentPixels(pic, 0x000000);
+      WebPCleanupTransparentAreaLossless(pic);
     }
 
     ok = VP8LEncodeImage(config, pic);  // Sets pic->error in case of problem.
