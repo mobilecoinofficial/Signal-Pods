@@ -124,6 +124,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
     @package
     UIImage <YYAnimatedImage> *_curAnimatedImage;
     
+    dispatch_once_t _onceToken;
     dispatch_semaphore_t _lock; ///< lock for _buffer
     NSOperationQueue *_requestQueue; ///< image request queue, serial
     
@@ -230,7 +231,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
 
 // init the animated params.
 - (void)resetAnimated {
-    if (!_link) {
+    dispatch_once(&_onceToken, ^{
         _lock = dispatch_semaphore_create(1);
         _buffer = [NSMutableDictionary new];
         _requestQueue = [[NSOperationQueue alloc] init];
@@ -243,7 +244,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    }
+    });
     
     [_requestQueue cancelAllOperations];
     LOCK(
@@ -368,11 +369,7 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
         [self resetAnimated];
         _curAnimatedImage = newVisibleImage;
         _curFrame = newVisibleImage;
-        if (self.alwaysInfiniteLoop) {
-            _totalLoop = 0;
-        } else {
-            _totalLoop = _curAnimatedImage.animatedImageLoopCount;
-        }
+        _totalLoop = _curAnimatedImage.animatedImageLoopCount;
         _totalFrameCount = _curAnimatedImage.animatedImageFrameCount;
         [self calcMaxBufferCount];
     }
@@ -532,11 +529,6 @@ typedef NS_ENUM(NSUInteger, YYAnimatedImageType) {
 - (void)displayLayer:(CALayer *)layer {
     if (_curFrame) {
         layer.contents = (__bridge id)_curFrame.CGImage;
-    } else {
-        // If we have no animation frames, call super implementation. iOS 14+ UIImageView use this delegate method for rendering.
-        if ([UIImageView instancesRespondToSelector:@selector(displayLayer:)]) {
-            [super displayLayer:layer];
-        }
     }
 }
 
