@@ -1,6 +1,6 @@
 {
   "name": "MobileCoin",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "summary": "A library for communicating with MobileCoin network",
   "authors": "MobileCoin",
   "homepage": "https://www.mobilecoin.com/",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/mobilecoinofficial/MobileCoin-Swift.git",
-    "tag": "v1.2.3",
+    "tag": "v1.2.4",
     "submodules": true
   },
   "platforms": {
