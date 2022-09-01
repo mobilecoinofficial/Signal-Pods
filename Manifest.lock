@@ -17,9 +17,9 @@ PODS:
   - LibMobileCoin/CoreHTTP (1.2.2):
     - SwiftProtobuf (~> 1.5)
   - libPhoneNumber-iOS (0.9.15)
-  - LibSignalClient (0.20.0):
+  - LibSignalClient (0.19.3):
     - SignalCoreKit
-  - LibSignalClient/Tests (0.20.0):
+  - LibSignalClient/Tests (0.19.3):
     - SignalCoreKit
   - libwebp (1.2.3):
     - libwebp/demux (= 1.2.3)
@@ -86,8 +86,8 @@ DEPENDENCIES:
   - "Curve25519Kit/Tests (from `ssh://git@github.com/signalapp/Curve25519Kit`, branch `feature/SignalClient-adoption`)"
   - GRDB.swift/SQLCipher
   - libPhoneNumber-iOS (from `https://github.com/signalapp/libPhoneNumber-iOS`, branch `signal-master`)
-  - LibSignalClient (from `https://github.com/signalapp/libsignal-client.git`, tag `v0.20.0`)
-  - LibSignalClient/Tests (from `https://github.com/signalapp/libsignal-client.git`, tag `v0.20.0`)
+  - LibSignalClient (from `https://github.com/signalapp/libsignal-client.git`, tag `v0.19.3`)
+  - LibSignalClient/Tests (from `https://github.com/signalapp/libsignal-client.git`, tag `v0.19.3`)
   - libwebp
   - lottie-ios
   - Mantle (from `https://github.com/signalapp/Mantle`, branch `signal-master`)
@@ -138,7 +138,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/signalapp/libPhoneNumber-iOS
   LibSignalClient:
     :git: https://github.com/signalapp/libsignal-client.git
-    :tag: v0.20.0
+    :tag: v0.19.3
   Mantle:
     :branch: signal-master
     :git: https://github.com/signalapp/Mantle
@@ -175,7 +175,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/signalapp/libPhoneNumber-iOS
   LibSignalClient:
     :git: https://github.com/signalapp/libsignal-client.git
-    :tag: v0.20.0
+    :tag: v0.19.3
   Mantle:
     :commit: e7e46253bb01ce39525d90aa69ed9e85e758bfc4
     :git: https://github.com/signalapp/Mantle
@@ -210,7 +210,7 @@ SPEC CHECKSUMS:
   GRDB.swift: 1395cb3556df6b16ed69dfc74c3886abc75d2825
   LibMobileCoin: 860cbd565a4839cb8be784465100d9f09ac419aa
   libPhoneNumber-iOS: 2d26d0a38933eee2702962a4dbdec2fc20e5ef9f
-  LibSignalClient: 6c38eed7d2d325c43d56bd31c1511385e8af58ee
+  LibSignalClient: 3180d534297ae089f15af948eade74c3dcaf16de
   libwebp: 60305b2e989864154bd9be3d772730f08fc6a59c
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
   lottie-ios: 016449b5d8be0c3dcbcfa0a9988469999cd04c5d
@@ -230,6 +230,6 @@ SPEC CHECKSUMS:
   SwiftProtobuf: 3320217e9d8fb75f36b40282e78c482640fd75dd
   YYImage: f1ddd15ac032a58b78bbed1e012b50302d318331
 
-PODFILE CHECKSUM: 94a8276d83a9920f741bbfbb1ead4f831b3319d6
+PODFILE CHECKSUM: ca3e43f185d196d90ed13d0db06eb6e199885463
 
 COCOAPODS: 1.11.3
