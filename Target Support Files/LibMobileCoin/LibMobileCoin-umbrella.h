@@ -12,6 +12,7 @@
 
 #import "attest.h"
 #import "bip39.h"
+#import "chacha20_rng.h"
 #import "common.h"
 #import "crypto.h"
 #import "encodings.h"

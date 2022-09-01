@@ -6,7 +6,7 @@ import Foundation
 
 #if swift(>=5.5)
 
-@available(iOS 13.0, *)
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension MobileCoinClient {
 
     @discardableResult
@@ -38,6 +38,24 @@ extension MobileCoinClient {
                                memoType: memoType,
                                amount: amount,
                                fee: fee) {
+                continuation.resume(with: $0)
+            }
+        }
+    }
+
+    public func prepareTransaction(
+        to recipient: PublicAddress,
+        amount: Amount,
+        fee: UInt64,
+        rng: MobileCoinRng,
+        memoType: MemoType = .recoverable
+    ) async throws -> PendingSinglePayloadTransaction {
+        try await withCheckedThrowingContinuation { continuation in
+            prepareTransaction(to: recipient,
+                               memoType: memoType,
+                               amount: amount,
+                               fee: fee,
+                               rng: rng) {
                 continuation.resume(with: $0)
             }
         }
