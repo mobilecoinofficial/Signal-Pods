@@ -48,11 +48,11 @@ public class ServerZkAuthOperations {
     }
   }
 
-  public func verifyAuthCredentialPresentation(groupPublicParams: GroupPublicParams, authCredentialPresentation: AuthCredentialPresentation, now: Date = Date()) throws {
+  public func verifyAuthCredentialPresentation(groupPublicParams: GroupPublicParams, authCredentialPresentation: AuthCredentialPresentation) throws {
     try serverSecretParams.withUnsafePointerToSerialized { serverSecretParams in
       try groupPublicParams.withUnsafePointerToSerialized { groupPublicParams in
         try authCredentialPresentation.withUnsafeBorrowedBuffer { authCredentialPresentation in
-          try checkError(signal_server_secret_params_verify_auth_credential_presentation(serverSecretParams, groupPublicParams, authCredentialPresentation, UInt64(now.timeIntervalSince1970)))
+          try checkError(signal_server_secret_params_verify_auth_credential_presentation(serverSecretParams, groupPublicParams, authCredentialPresentation))
         }
       }
     }
